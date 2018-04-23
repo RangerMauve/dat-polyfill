@@ -1,0 +1,35 @@
+{
+  "name": "dat-polyfill",
+  "version": "1.0.0",
+  "description": "Add support for the DatArchive API to the web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RangerMauve/dat-polyfill.git"
+  },
+  "keywords": [
+    "dat",
+    "archive",
+    "polyfill",
+    "beaker"
+  ],
+  "author": "rangermauve",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RangerMauve/dat-polyfill/issues"
+  },
+  "homepage": "https://github.com/RangerMauve/dat-polyfill#readme",
+  "dependencies": {
+    "dat-archive-web": "^1.0.0",
+    "frame-rpc": "^1.4.0",
+    "random-access-storage": "^1.1.1"
+  },
+  "devDependencies": {
+    "browserify": "^16.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0"
+  }
+}
