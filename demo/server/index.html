@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<title>Dat Polyfill Server</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+  }
+  .search-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+  }
+  .search-box {
+    padding: 0.5em;
+    flex: 1;
+  }
+  .client-container {
+    flex: 1;
+    position: relative;
+  }
+  .client-frame {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+  }
+  .hiddeen {
+    display: none
+  }
+</style>
+<form class="search-container" target="client-frame">
+  <input type="hidden" name="DAT_GATEWAY" value="http://gateway.mauve.moe:3000" />
+  <input placeholder="dat://" class="search-box" />
+  <button class="search-button">Go</button>
+</form>
+<div class="client-container">
+  <iframe id="client-frame" src="https://google.ca" class="client-frame" seamless="seamless"></iframe>
+</div>
+<form id="selection-form" class="selection-form hidden">
+  <div id="selection-items" class="selection-items"></div>
+  <button>OK</button>
+  <button id="cancel-button">Cancel</button>
+</form>
+<script src="bundle.js"></script>
