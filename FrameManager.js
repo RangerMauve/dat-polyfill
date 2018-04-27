@@ -10,7 +10,7 @@ module.exports = class FrameManager extends DefaultManager {
 
   getStorage (key, isNew) {
     return (name) => {
-      return this._client.getStorage(`${key}/${name}`)
+      return this._client.getStorage()(`${key}/${name}`)
     }
   }
 

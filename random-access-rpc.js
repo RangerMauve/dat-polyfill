@@ -8,23 +8,23 @@ module.exports = {
 function client (rpc) {
   return function (name) {
     return randomAccess({
-      open: ({ callback }) => {
-        rpc.call('open', name, callback)
+      open: (request) => {
+        rpc.call('open', name, request.callback.bind(request))
       },
-      read: ({ offset, size, callback }) => {
-        rpc.call('read', name, offset, size, callback)
+      read: (request) => {
+        rpc.call('read', name, request.offset, request.size, request.callback.bind(request))
       },
-      write: ({ offset, data, callback }) => {
-        rpc.call('write', name, offset, data, callback)
+      write: (request) => {
+        rpc.call('write', name, request.offset, request.data, request.callback.bind(request))
       },
-      del: ({ offset, size, callback }) => {
-        rpc.call('del', name, offset, size, callback)
+      del: (request) => {
+        rpc.call('del', name, request.offset, request.size, request.callback.bind(request))
       },
-      close: ({ callback }) => {
-        rpc.call('close', name, callback)
+      close: (request) => {
+        rpc.call('close', name, request.callback.bind(request))
       },
-      destroy: ({ callback }) => {
-        rpc.call('destroy', name, callback)
+      destroy: (request) => {
+        rpc.call('destroy', name, request.callback.bind(request))
       }
     })
   }

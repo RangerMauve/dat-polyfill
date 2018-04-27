@@ -12,7 +12,7 @@ let currentSelection = null
 
 const storage = idb('dat://storage')
 
-const server = new RPC.Server(window, frame, {
+const server = new RPC.Server(window, frame.contentWindow, {
   storage,
   addArchive,
   selectArchive

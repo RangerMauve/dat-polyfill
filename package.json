@@ -4,7 +4,8 @@
   "description": "Add support for the DatArchive API to the web",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-demo": "browserify -r fs:graceful-fs -s DemoServer -e ./demo/server/index.js > ./demo/server/bundle.js && browserify -r fs:graceful-fs -s DatPolyfill -e ./polyfill.js > ./demo/client/bundle.js"
   },
   "repository": {
     "type": "git",

@@ -41,7 +41,7 @@ class Server {
    */
   constructor (window, client, options) {
     Object.assign(this, options)
-    this._rpc = RPC(window, client, '*', this._methods())
+    this._rpc = RPC(window, client, ANY_ORIGIN, this._methods())
   }
 
   _methods () {

@@ -14,7 +14,7 @@ if (!window.DatArchive) {
 function detectGateway () {
   const parsed = URLParse(window.location + '')
 
-  const inURL = MATCH_GATEWAY.exec(parsed.search)
+  const inURL = MATCH_GATEWAY.exec(parsed.query)
 
   if (inURL) {
     return unescape(inURL[1])
@@ -45,7 +45,7 @@ function doPolyfill () {
   const gateway = detectGateway()
 
   if (isFrame) {
-    DatArchive.setManager(new FrameManager(gateway, window.parent))
+    DatArchive.setManager(new FrameManager(gateway, window.parent.window))
   } else {
     DatArchive.setManager(new DefaultManager(gateway))
   }
