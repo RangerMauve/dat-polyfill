@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/RangerMauve/dat-polyfill#readme",
   "dependencies": {
-    "dat-archive-web": "^1.0.0",
+    "dat-archive-web": "github:rangermauve/dat-archive-web#addarchive",
     "frame-rpc": "^1.4.0",
+    "random-access-network": "^1.0.2",
     "random-access-storage": "^1.1.1",
     "url-parse": "^1.4.0"
   },

@@ -1,4 +1,5 @@
-const RandomAccessRPC = require('./random-access-rpc')
+const { RAN, NoopTransport, RasBridge } = require('random-access-network')
+var randomAccess = require('random-access-storage')
 const RPC = require('frame-rpc')
 
 const ANY_ORIGIN = '*'
@@ -14,7 +15,9 @@ class Client {
   }
 
   getStorage () {
-    return RandomAccessRPC.client(this._rpc)
+    return (name) => {
+      return RAN(name, new RPCTransport(name, this._rpc))
+    }
   }
 
   selectArchive (options, callback) {
@@ -41,18 +44,71 @@ class Server {
    */
   constructor (window, client, options) {
     Object.assign(this, options)
+    this._wrapStorage()
     this._rpc = RPC(window, client, ANY_ORIGIN, this._methods())
+    this._bridge = RasBridge((name) => this._getStorage(name))
+  }
+
+  _wrapStorage () {
+    const rawStorage = this.storage
+
+    this.storage = (name) => {
+      const access = rawStorage(name)
+      return randomAccess({
+        open: (request) => {
+          access.open(request.callback.bind(request))
+        },
+        read: (request) => {
+          access.read(request.offset, request.size, request.callback.bind(request))
+        },
+        write: (request) => {
+          access.write(request.offset, request.data, request.callback.bind(request))
+        },
+        del: (request) => {
+          access.del(request.offset, request.size, request.callback.bind(request))
+        },
+        close: (request) => {
+          access.close(request.callback.bind(request))
+        },
+        destroy: (request) => {
+          access.destroy(request.callback.bind(request))
+        }
+      })
+    }
+  }
+
+  _getStorage (name) {
+    const storage = this.storage(name)
+    return storage
   }
 
   _methods () {
-    return Object.assign(RandomAccessRPC.server(this.storage), {
+    return {
       selectArchive: (options, callback) => {
         this.selectArchive(options, callback)
       },
       addArchive: (key, secretKey, options, callback) => {
         this.addArchive(key, secretKey, options, callback)
+      },
+      storage: (name, request, callback) => {
+        this._bridge(Buffer.from(request), callback)
       }
+    }
+  }
+}
+
+class RPCTransport extends NoopTransport {
+  constructor (name, rpc) {
+    super(name)
+    this._rpc = rpc
+  }
+  send (request) {
+    this._rpc.call('storage', this._name, request, (response) => {
+      this._next(Buffer.from(response))
     })
+  }
+  close () {
+    // ¯\_(ツ)_/¯
   }
 }
 
