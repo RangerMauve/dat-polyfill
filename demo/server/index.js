@@ -24,24 +24,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOMContentLoaded')
   const searchBox = document.getElementById('search')
   const goButton = document.getElementById('go')
-  const frame = document.getElementById('client-frame')
   searchBox.value = wikiDat
   goButton.addEventListener('click', addDat)
-
-  const server = new RPC.Server(window, frame.contentWindow, {
-    storage,
-    addArchive,
-    selectArchive
-  })
-  window.gatewayServer = server
 })
 
 async function addDat () {
   const searchBox = document.getElementById('search')
   const datAddress = searchBox.value
   console.log('added ' + datAddress)
-  // let forkedArchive = await DatArchive.fork(datAddress)
-    frame.contentWindow.postMessage(datAddress, '*');
+  frame.contentWindow.postMessage(datAddress, '*')
 }
 
 form.addEventListener('submit', handleSelected)
