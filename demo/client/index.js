@@ -4,7 +4,7 @@ async function receiveMessage (event) {
   if (typeof data === 'string' && data.startsWith('dat:')) {
     let datAddress = data
     let forkedArchive = await DatArchive.fork(datAddress)
-    console.log('we forked!')
+    console.log('we forked to', forkedArchive.url)
   }
 }
 
