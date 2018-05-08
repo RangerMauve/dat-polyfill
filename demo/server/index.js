@@ -40,7 +40,8 @@ async function addDat () {
   const searchBox = document.getElementById('search')
   const datAddress = searchBox.value
   console.log('added ' + datAddress)
-  let forkedArchive = await DatArchive.fork(datAddress)
+  // let forkedArchive = await DatArchive.fork(datAddress)
+    frame.contentWindow.postMessage(datAddress, '*');
 }
 
 form.addEventListener('submit', handleSelected)
