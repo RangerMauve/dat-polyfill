@@ -61,3 +61,5 @@ typings/
 package-lock.json
 
 bundle.js
+.idea
+.DS_Store

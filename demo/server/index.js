@@ -18,6 +18,32 @@ const server = new RPC.Server(window, frame.contentWindow, {
   selectArchive
 })
 
+const wikiDat = 'dat://wysiwywiki-pfrazee.hashbase.io'
+
+// $(document).ready(() => {
+document.addEventListener('DOMContentLoaded', (event) => {
+  console.log('DOMContentLoaded')
+  const searchBox = document.getElementById('search')
+  const goButton = document.getElementById('go')
+  const frame = document.getElementById('client-frame')
+  searchBox.value = wikiDat
+  goButton.addEventListener('click', addDat)
+
+  const server = new RPC.Server(window, frame.contentWindow, {
+    storage,
+    addArchive,
+    selectArchive
+  })
+  window.gatewayServer = server
+})
+
+async function addDat () {
+  const searchBox = document.getElementById('search')
+  const dat = searchBox.value
+  console.log('added ' + dat)
+  let forkedArchive = await DatArchive.fork(window.datAddress)
+}
+
 form.addEventListener('submit', handleSelected)
 
 window.gatewayServer = server

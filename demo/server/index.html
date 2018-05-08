@@ -46,10 +46,10 @@
     border-radius: 1em;
   }
 </style>
-<form class="search-container" target="client-frame">
-  <input type="hidden" name="DAT_GATEWAY" value="http://gateway.mauve.moe:3000" />
-  <input placeholder="dat://" class="search-box" />
-  <button class="search-button">Go</button>
+<form class="search-container" target="client-frame" onsubmit="return false;">
+  <!--<input type="hidden" name="DAT_GATEWAY" value="http://gateway.mauve.moe:3000" />-->
+  <input placeholder="dat://" class="search-box" id="search" />
+  <button class="search-button" id="go">Go</button>
 </form>
 <div class="client-container">
   <iframe id="client-frame" src="../client/index.html?DAT_GATEWAY=http%3A//gateway.mauve.moe%3A3000" class="client-frame" seamless="seamless"></iframe>
