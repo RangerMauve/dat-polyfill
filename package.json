@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-demo": "browserify --debug -r fs:graceful-fs -s DemoServer -e ./demo/server/index.js > ./demo/server/bundle.js && browserify --debug -r fs:graceful-fs -s DatPolyfill -e ./polyfill.js > ./demo/client/bundle.js",
-    "watch-demo": "watchify --debug -r fs:graceful-fs -s DemoServer -e ./demo/server/index.js -o ./demo/server/bundle.js && watchify --debug -r fs:graceful-fs -s DatPolyfill -e ./polyfill.js -o ./demo/client/bundle.js"
+    "watch-demo": "watchify -v --debug -r fs:graceful-fs -s DatPolyfill -e ./polyfill.js -o ./demo/client/bundle.js && watchify -v --debug -r fs:graceful-fs -s DemoServer -e ./demo/server/index.js -o ./demo/server/bundle.js"
   },
   "repository": {
     "type": "git",

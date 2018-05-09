@@ -42,11 +42,16 @@ window.gatewayStorage = storage
 
 function addArchive (key, secretKey, options, callback) {
   const archiveList = getArchives()
-  archiveList.push({
-    key,
-    secretKey,
-    details: options
-  })
+  try {
+    archiveList.push({
+      key,
+      secretKey,
+      details: options
+    })
+  } catch (e) {
+    console.log('error: ' + e)
+  }
+  console.log('setting Archives for key: ' + key)
   setArchives(archiveList)
 }
 
@@ -109,7 +114,11 @@ function handleSelected (e) {
 }
 
 function setArchives (newList) {
-  window.localStorage.archives = JSON.stringify(newList)
+  try {
+    window.localStorage.archives = JSON.stringify(newList)
+  } catch (e) {
+    console.log('Error: ' + e)
+  }
 }
 
 function getArchives () {
