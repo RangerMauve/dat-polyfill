@@ -53,6 +53,7 @@ function addArchive (key, secretKey, options, callback) {
   }
   console.log('setting Archives for key: ' + key)
   setArchives(archiveList)
+  callback()
 }
 
 function selectArchive (options, callback) {
