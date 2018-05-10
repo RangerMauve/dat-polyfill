@@ -68,23 +68,33 @@ function selectArchive (options, callback) {
 function showSelection (selectionItem) {
   currentSelection = selectionItem
   const archiveList = getArchives()
-  const renderedItems = archiveList.map((archive) => {
-    return `
+  if (archiveList.length !== 0) {
+    const renderedItems = archiveList.map((archive) => {
+      return `
     <label class="select-item">
       <input type="checkbox" value="${archive.key}">
       ${archive.details.title || archive.key}
     </label>
 `
-  })
-  const toRender = `
+    })
+    let toRender = `
+    <div class="select-message">
+      ${DEFAULT_SELECT_MESSAGE}
+    </div>
+    ${renderedItems.join('\n')}
+`
+    if (typeof selectionItem.options !== 'undefined') {
+      toRender = `
     <div class="select-message">
       ${selectionItem.options.title || DEFAULT_SELECT_MESSAGE}
     </div>
     ${renderedItems.join('\n')}
 `
+    }
 
-  selectionItems.innerHTML = toRender
-  form.classList.remove('hidden')
+    selectionItems.innerHTML = toRender
+    form.classList.remove('hidden')
+  }
 }
 
 function showNext () {

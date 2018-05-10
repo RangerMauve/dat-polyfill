@@ -37,11 +37,7 @@
     display: none
   }
   .selection-form {
-    position: fixed;
-    top: 1em;
-    bottom: 1em;
-    left: 1em;
-    right: 1em;
+    font-family: Arial, Helvetica, sans-serif;
     background: #FAFAFA;
     border-radius: 1em;
   }
@@ -51,12 +47,13 @@
   <input placeholder="dat://" class="search-box" id="search" />
   <button class="search-button" id="go">Go</button>
 </form>
-<div class="client-container">
-  <iframe id="client-frame" src="../client/index.html?DAT_GATEWAY=http%3A//gateway.mauve.moe%3A3000" class="client-frame" seamless="seamless"></iframe>
-</div>
 <form id="selection-form" class="selection-form hidden">
   <div id="selection-items" class="selection-items"></div>
   <button>OK</button>
   <button id="cancel-button">Cancel</button>
 </form>
+<div class="client-container">
+  <iframe id="client-frame" src="../client/index.html?DAT_GATEWAY=http%3A//gateway.mauve.moe%3A3000" class="client-frame" seamless="seamless"></iframe>
+</div>
+
 <script src="bundle.js"></script>
