@@ -74,7 +74,7 @@ function showSelection (selectionItem) {
     <label class="select-item">
       <input type="checkbox" value="${archive.key}">
       ${archive.details.title || archive.key}
-    </label>
+    </label><br/>
 `
     })
     let toRender = `

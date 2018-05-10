@@ -6,17 +6,9 @@ async function receiveMessage (event) {
     try {
       let forkedArchive = await DatArchive.fork(datAddress)
       console.log('we forked to', forkedArchive.url)
-      // DatArchive.selectArchive()
-      let theArchive = await DatArchive.selectArchive({})
+      // let theArchive = await DatArchive.selectArchive({})
       console.log('hey!')
-
-      // const contents = `
-      //   <title>Gateway Test</title>
-      //   <p>Hello World!</p>
-      //   `
-      // const archive = await new DatArchive(forkedArchive.url)
-      // await archive.writeFile('sayHello.html', contents)
-      // console.log('Wrote sayHello.html to ' + forkedArchive.url)
+      parent.location.reload()
     } catch (e) {
       console.log('Error: ' + e)
     }
@@ -25,7 +17,6 @@ async function receiveMessage (event) {
       let url = data.arguments[1]
       if (typeof url === 'string' && url.startsWith('dat:')) {
         console.log('dat: ' + url)
-        alert('Check console for progress on writing to ' + url)
         // let archive = await new DatArchive(url)
       }
     }
@@ -35,15 +26,22 @@ async function receiveMessage (event) {
 document.addEventListener('DOMContentLoaded', async (event) => {
   console.log('DOMContentLoaded in client')
   let archive = await DatArchive.selectArchive({})
+  await archive._loadPromise
   let url = archive.url
   console.log('primed selectArchive for ' + url)
-  let nuArchive = await new DatArchive(url)
   const contents = `
         <title>Gateway Test</title>
         <p>Hello World!</p>
         `
-  await archive.writeFile('sayHello.html', contents)
-  console.log('Wrote sayHello.html to ' + nuArchive.url)
+  try {
+    await archive.writeFile('sayHello.html', contents)
+    console.log('Wrote sayHello.html to ' + url)
+    alert('Wrote sayHello.html to ' + url)
+    // change the iframe src to this url
+  } catch (e) {
+    alert('Error: ' + e)
+    console.log('Error: ' + e)
+  }
 })
 
 window.addEventListener('message', receiveMessage, false)
