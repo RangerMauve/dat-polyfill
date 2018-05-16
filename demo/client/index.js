@@ -29,6 +29,18 @@ document.addEventListener('DOMContentLoaded', async (event) => {
   await archive._loadPromise
   let url = archive.url
   console.log('primed selectArchive for ' + url)
+  let key = url.replace('dat://', '')
+  // find the correct secret key
+  let archives = JSON.parse(localStorage.getItem('archives'))
+  function getArchive (archive) {
+    return archive.key === key
+  }
+
+  let archiveKVP = archives.find(getArchive)
+  console.log('archive secretKey: ' + archiveKVP.secretKey)
+  // now pop it into our archive
+  await archive._archive.metadata._storage.secretKey.write(0, archiveKVP.secretKey)
+
   const contents = `
         <title>Gateway Test</title>
         <p>Hello World!</p>
