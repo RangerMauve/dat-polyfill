@@ -44,38 +44,38 @@ class Server {
    */
   constructor (window, client, options) {
     Object.assign(this, options)
-    // this._wrapStorage()
+    this._wrapStorage()
     this._rpc = RPC(window, client, ANY_ORIGIN, this._methods())
     this._bridge = RasBridge((name) => this._getStorage(name))
   }
 
-  // _wrapStorage () {
-  //   const rawStorage = this.storage
-  //
-  //   this.storage = (name) => {
-  //     const access = rawStorage(name)
-  //     return randomAccess({
-  //       open: (request) => {
-  //         access.open(request.callback.bind(request))
-  //       },
-  //       read: (request) => {
-  //         access.read(request.offset, request.size, request.callback.bind(request))
-  //       },
-  //       write: (request) => {
-  //         access.write(request.offset, request.data, request.callback.bind(request))
-  //       },
-  //       del: (request) => {
-  //         access.del(request.offset, request.size, request.callback.bind(request))
-  //       },
-  //       close: (request) => {
-  //         access.close(request.callback.bind(request))
-  //       },
-  //       destroy: (request) => {
-  //         access.destroy(request.callback.bind(request))
-  //       }
-  //     })
-  //   }
-  // }
+  _wrapStorage () {
+    const rawStorage = this.storage
+
+    this.storage = (name) => {
+      const access = rawStorage(name)
+      return randomAccess({
+        open: (request) => {
+          access.open(request.callback.bind(request))
+        },
+        read: (request) => {
+          access.read(request.offset, request.size, request.callback.bind(request))
+        },
+        write: (request) => {
+          access.write(request.offset, request.data, request.callback.bind(request))
+        },
+        del: (request) => {
+          access.del(request.offset, request.size, request.callback.bind(request))
+        },
+        close: (request) => {
+          access.close(request.callback.bind(request))
+        },
+        destroy: (request) => {
+          access.destroy(request.callback.bind(request))
+        }
+      })
+    }
+  }
 
   _getStorage (name) {
     const storage = this.storage(name)
