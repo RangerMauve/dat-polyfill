@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
   let archiveKVP = archives.find(getArchive)
   console.log('archive secretKey: ' + archiveKVP.secretKey)
   // now pop it into our archive
-  let secretKey = Buffer.from(archiveKVP.secretKey, 'hex')
-  await archive._archive.metadata._storage.secretKey.write(0, secretKey)
+  // let secretKey = Buffer.from(archiveKVP.secretKey, 'hex')
+  // await archive._archive.metadata._storage.secretKey.write(0, secretKey)
 
   const contents = `
         <title>Gateway Test</title>

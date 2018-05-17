@@ -28,7 +28,7 @@
     "dat-archive-web": "github:rangermauve/dat-archive-web",
     "frame-rpc": "^1.4.0",
     "random-access-file": "^2.0.1",
-    "random-access-network": "^1.0.2",
+    "random-access-network": "^1.0.4",
     "random-access-storage": "^1.1.1",
     "url-parse": "^1.4.0"
   },
