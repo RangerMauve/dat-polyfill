@@ -31,6 +31,7 @@ function addArchive (key, secretKey, options, callback) {
     details: options
   })
   setArchives(archiveList)
+  callback(null)
 }
 
 function selectArchive (options, callback) {

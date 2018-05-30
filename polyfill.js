@@ -1,11 +1,12 @@
 const DatArchive = require('dat-archive-web/DatArchive')
-const DefaultManager = require('dat-archive-web/DatArchive')
 const FrameManager = require('./FrameManager')
+const PersistentManager = require('./PersistentManager')
 const URLParse = require('url-parse')
 
 const MATCH_GATEWAY = /DAT_GATEWAY=([^&]+)/
 const BASE_32_KEY_LENGTH = 52
 const DEFAULT_GATEWAY = `http:localhost:3000`
+const DAT_STORAGE_KEY = 'dat://storage'
 
 if (!window.DatArchive) {
   doPolyfill()
@@ -47,7 +48,7 @@ function doPolyfill () {
   if (isFrame) {
     DatArchive.setManager(new FrameManager(gateway, window.parent.window))
   } else {
-    DatArchive.setManager(new DefaultManager(gateway))
+    DatArchive.setManager(new PersistentManager(gateway, DAT_STORAGE_KEY))
   }
 
   window.DatArchive = DatArchive
