@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -r fs:graceful-fs -s DatPolyfill -e ./polyfill.js > dat-polyfill.js",
     "build-demo": "browserify -r fs:graceful-fs -s DemoServer -e ./demo/server/index.js > ./demo/server/bundle.js && browserify -r fs:graceful-fs -s DatPolyfill -e ./polyfill.js > ./demo/client/bundle.js"
   },
   "repository": {
@@ -24,11 +25,13 @@
   },
   "homepage": "https://github.com/RangerMauve/dat-polyfill#readme",
   "dependencies": {
-    "dat-archive-web": "github:rangermauve/dat-archive-web#master",
+    "dat-archive-web": "github:rangermauve/dat-archive-web",
+    "debounce": "^1.1.0",
     "frame-rpc": "^1.4.0",
     "random-access-memory": "^3.0.0",
     "random-access-network": "^1.0.5",
     "random-access-storage": "^1.1.1",
+    "random-access-idb": "github:random-access-storage/random-access-idb",
     "url-parse": "^1.4.0"
   },
   "devDependencies": {
@@ -38,7 +41,6 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "random-access-idb": "github:random-access-storage/random-access-idb"
+    "eslint-plugin-standard": "^3.1.0"
   }
 }

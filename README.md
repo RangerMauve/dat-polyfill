@@ -16,7 +16,7 @@ Add support for the DatArchive API to the web
 
 - Since data is stored in IndexedDB, there's a limit on how much you can store
 - Synchronizing with a public gateway isn't as secure as using a local one since it can inspect the dat URLs you are trying to load.
-- `dat://` URLs aren't being redirected yet, so links and images/iframes might be broken. This will be addressed soon enough
+- Local gateways can be a lot slower
 
 ## How it works
 

@@ -1,12 +1,14 @@
 const DatArchive = require('dat-archive-web/DatArchive')
 const FrameManager = require('./FrameManager')
 const PersistentManager = require('./PersistentManager')
+const SourceRewriter = require('./SourceRewriter')
 const URLParse = require('url-parse')
 
 const MATCH_GATEWAY = /DAT_GATEWAY=([^&]+)/
 const BASE_32_KEY_LENGTH = 52
 const DEFAULT_GATEWAY = `http:localhost:3000`
 const DAT_STORAGE_KEY = 'dat://storage'
+const REWRITE_DELAY = 2000 // 2 seconds
 
 if (!window.DatArchive) {
   doPolyfill()
@@ -50,6 +52,17 @@ function doPolyfill () {
   } else {
     DatArchive.setManager(new PersistentManager(gateway, DAT_STORAGE_KEY))
   }
+
+  // Chrome's URL implementation doesn't handle `dat://` protocol
+  window.URL = URLParse
+
+  const rewriter = new SourceRewriter(gateway, REWRITE_DELAY)
+
+  // Start rewriting src and href attributes
+  rewriter.start()
+
+  // Once the document loads, we should rewrite all existing items
+  document.addEventListener('load', () => rewriter.rewrite())
 
   window.DatArchive = DatArchive
 }

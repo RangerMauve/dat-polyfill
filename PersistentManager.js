@@ -2,7 +2,7 @@ const DatArchive = require('dat-archive-web')
 const DefaultManager = DatArchive.DefaultManager
 
 const ram = require('random-access-memory')
-const idb = require('randpm-access-idb')
+const idb = require('random-access-idb')
 
 module.exports = class FrameManager extends DefaultManager {
   constructor (gateway, storageKey) {
