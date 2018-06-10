@@ -16,6 +16,8 @@ module.exports = class SourceRewriter {
 
   start () {
     this.observer.observe(document.body, OBSERVATION_OPTIONS)
+
+    this.rewrite()
   }
 
   stop () {
